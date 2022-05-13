@@ -18,7 +18,6 @@ const personSchema = new mongoose.Schema({
       validator: (v) => {
         return /\d{2,3}-/.test(v);
       },
-      message: phoneNumber => `${phoneNumber.value} invalid!`
     },
     required: true
   }

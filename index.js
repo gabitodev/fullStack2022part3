@@ -48,13 +48,14 @@ app.put('/api/persons/:id', (request, response, next) => {
   
   Person.findByIdAndUpdate(
     request.params.id, 
-    { name: name, number: number }, 
-    {new: true, runValidators: true, context: 'query'}
-    )
-    .then(updatedPerson => {
-    response.json(updatedPerson);
-  })
-  .catch(error => next(error));
+    { name, number },
+    { new: true, runValidators: true, context: 'query' }
+  ) 
+    .then(updatedNote => {
+      if (!updatedNote) response.status(404).end();
+        response.json(updatedNote)
+    })
+    .catch(error => next(error))
 });
 
 app.delete('/api/persons/:id', (request, response, next) => {
